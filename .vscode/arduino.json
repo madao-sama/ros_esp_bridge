@@ -1,0 +1,5 @@
+{
+    "configuration": "JTAGAdapter=default,CDCOnBoot=cdc,MSCOnBoot=default,DFUOnBoot=default,UploadMode=cdc,PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,DebugLevel=none,EraseFlash=none",
+    "board": "deneyap:esp32:dym_mpv10",
+    "programmer": "esptool"
+}
