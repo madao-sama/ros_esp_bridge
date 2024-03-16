@@ -58,6 +58,11 @@ void doPID(ts_motor_encoder_info * p) {
 }
 
 void updatePID() {  
+  static unsigned long long int last_time = millis();
+  if(last_time >= time_interval){
+    stopMotors();
+    return;
+  }
   if (!moving){
     resetPID();
     stopMotors();
@@ -69,7 +74,7 @@ void updatePID() {
   doPID(&motor3PID);
   doPID(&motor4PID);
   setMotorSpeed();
-  digitalWrite(2, !digitalRead(2));
+  // digitalWrite(2, !digitalRead(2));
 
 }
 

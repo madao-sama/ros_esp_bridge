@@ -38,6 +38,8 @@ float Kd;
 float Ki;
 float Ko;
 
+int time_interval = 1000;
+
 void updatePID();
 void stopMotors();
 void resetPID();
