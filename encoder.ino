@@ -46,7 +46,8 @@ void shaft_moved_3(){
   }
 }
 
-void shaft_moved_4(){
+void shaft_moved_4(){  
+
   static int last_run = 0;
   if (millis()-last_run>5){
     if (digitalRead(encoder4_c2)==1){

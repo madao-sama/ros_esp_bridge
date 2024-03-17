@@ -35,6 +35,10 @@ void resetPID(){
 }
 
 void doPID(ts_motor_encoder_info * p) {
+
+  // Serial.print("pid: ");
+  // Serial.print("  core:  ");
+  // Serial.println( xPortGetCoreID());
   long Perror;
   long output;
   p->RealRPM = (60000000.0/(micros() - p->PrevMicros))*(p->Encoder - p->PrevEnc)/EncoderPerCount;
@@ -58,9 +62,10 @@ void doPID(ts_motor_encoder_info * p) {
 }
 
 void updatePID() {  
-  static unsigned long long int last_time = millis();
-  if(last_time >= time_interval){
+  if(millis()-last_message_time >= message_time_interval){
     stopMotors();
+    digitalWrite(2, LOW);
+
     return;
   }
   if (!moving){
@@ -68,13 +73,13 @@ void updatePID() {
     stopMotors();
     return;
   }
-  
+  digitalWrite(2, HIGH);
+
   doPID(&motor1PID);
   doPID(&motor2PID);
   doPID(&motor3PID);
   doPID(&motor4PID);
   setMotorSpeed();
-  // digitalWrite(2, !digitalRead(2));
 
 }
 

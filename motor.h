@@ -2,19 +2,16 @@
 #define MOTOR
 
 // Motor pins
-int motor1_in1 = 33;
-int motor1_in2 = 32;
+#define motor1_in1 (33)
+#define motor1_in2 (32)
+#define motor2_in1 (27)
+#define motor2_in2 (26)
+#define motor3_in1 (12)
+#define motor3_in2 (13)
+#define motor4_in1 (25)
+#define motor4_in2 (22)
 
-int motor2_in1 = 27;
-int motor2_in2 = 26;
-
-int motor3_in1 = 12;
-int motor3_in2 = 13;
-
-int motor4_in1 = 25;
-int motor4_in2 = 22;
-
-#define MAX_PWM        255  // Max PWM Value
+#define MAX_PWM    (255)  // Max PWM Value
 
 // Struct for defining each motors infos
 typedef struct {
@@ -37,8 +34,6 @@ float Kp;
 float Kd;
 float Ki;
 float Ko;
-
-int time_interval = 1000;
 
 void updatePID();
 void stopMotors();

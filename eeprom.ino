@@ -1,6 +1,7 @@
 #include "eeprom.h"
 
 void readFromEEPROM(){
+  Serial.println("read eeprom");
   preferences.begin("PIDValues", true); 
   Kp = preferences.getFloat("Kp", 20.0);
   Kd = preferences.getFloat("Kd", 12.0);
@@ -10,6 +11,7 @@ void readFromEEPROM(){
 }
 
 void writeToEEPROM(float KpVal, float KdVal, float KiVal, float KoVal){
+  Serial.println("write eeprom");
   preferences.begin("PIDValues", false); 
   preferences.putFloat("Kp", KpVal);
   preferences.putFloat("Kd", KdVal);

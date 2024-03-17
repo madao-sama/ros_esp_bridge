@@ -4,11 +4,12 @@
 #include "WiFi.h"
 #include "AsyncUDP.h"
 
-const char* ssid = "telefon";
-const char* pass = "telefonunsifresi";
+#define ssid       "telefon"
+#define pass       "telefonunsifresi"
 
 AsyncUDP udp;
 float arg_list[4];
+char *command;
 
 char UDPDataOperations(char *UDPData);
 
