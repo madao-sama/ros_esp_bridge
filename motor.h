@@ -6,8 +6,8 @@
 #define motor1_in2 (32)
 #define motor2_in1 (27)
 #define motor2_in2 (26)
-#define motor3_in1 (12)
-#define motor3_in2 (13)
+#define motor3_in1 (13)
+#define motor3_in2 (12)
 #define motor4_in1 (25)
 #define motor4_in2 (22)
 

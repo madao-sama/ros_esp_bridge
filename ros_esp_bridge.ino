@@ -1,4 +1,6 @@
 #include "ros_esp_bridge.h"
+#include <string.h>
+#include <stdlib.h>
 #include "utils.h"
 #include "encoder.h"
 #include "motor.h"
@@ -7,41 +9,33 @@
 
 void setup() {
   Serial.begin(115200);
-  retryConnectionPoint:
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, pass);
-  if (WiFi.waitForConnectResult() != WL_CONNECTED) {
-      Serial.println("WiFi Failed");
-      delay(200);
-      goto retryConnectionPoint;
-  }
+  // while(1){
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, pass);
+    if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+        Serial.println("WiFi Failed");
+        delay(200);
+    }
+    if (WiFi.waitForConnectResult() == WL_CONNECTED) {
+        Serial.println("WiFi Connected");
+        // break;
+    }
+  // }
+  delay(10);
+  Serial.println("UDP Initializing");
   if(udp.listenMulticast(IPAddress(239,1,2,3), 8080)) {
       Serial.print("UDP Listening on IP: ");
       Serial.println(WiFi.localIP());
       udp.onPacket([](AsyncUDPPacket packet) {
-
-          // Serial.print("Default datas: ");
-          // Serial.print(packet.length());
-          // Serial.println();
-          //reply to the client
           
-  // Serial.print("udp inside: ");
-  // Serial.print(command);
-  // Serial.print("  core:  ");
-  // Serial.println( xPortGetCoreID());
-
           char *tmp = reinterpret_cast <char *>(packet.data());
           // Serial.print("tmp: ");
           // Serial.println(tmp);
+          // Serial.print("outside length: ");
+          // Serial.println(strlen(tmp));
           if(UDPDataOperations(tmp)){
-            // Serial.println(tmp);
             runCommand();
           }
-          // Serial.print(cmd);
-          // Serial.print(arg_list[0]);
-          // Serial.print(arg_list[1]);
-          // Serial.print(arg_list[2]);
-          // Serial.println(arg_list[3]);          
       });
   }
 

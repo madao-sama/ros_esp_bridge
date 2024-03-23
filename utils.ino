@@ -12,27 +12,26 @@ void runCommand() {
     // char *token;
     // int i = 1;
 
-  last_message_time = millis();
   switch(*command) {
     case READ_ENCODERS:
-      // Serial.print(motor1PID.Encoder);
-      // Serial.print(" ");
-      // Serial.print(motor2PID.Encoder);
-      // Serial.print(" ");
-      // Serial.print(motor3PID.Encoder);
-      // Serial.print(" ");
-      // Serial.println(motor4PID.Encoder);
+      Serial.print(motor1PID.Encoder);
+      Serial.print(" ");
+      Serial.print(motor2PID.Encoder);
+      Serial.print(" ");
+      Serial.print(motor3PID.Encoder);
+      Serial.print(" ");
+      Serial.println(motor4PID.Encoder);
       break;
 
     case GET_PID_VALUES:
-      // Serial.print("Kp: ");
-      // Serial.print(Kp);
-      // Serial.print(" Kd: ");
-      // Serial.print(Kd);
-      // Serial.print(" Ki: ");
-      // Serial.print(Ki);
-      // Serial.print(" Ko: ");
-      // Serial.println(Ko);
+      Serial.print("Kp: ");
+      Serial.print(Kp);
+      Serial.print(" Kd: ");
+      Serial.print(Kd);
+      Serial.print(" Ki: ");
+      Serial.print(Ki);
+      Serial.print(" Ko: ");
+      Serial.println(Ko);
       break;
       
     case RESET_ENCODERS:
@@ -48,7 +47,8 @@ void runCommand() {
       // Serial.println("OK");
       break;
 
-    case MOTOR_SPEEDS:
+    case MOTOR_SPEEDS:  
+      last_message_time = millis();
       // Serial.println("motor speed");
       // Serial.println(argv1);
       // token = strtok(p_argv1, delim);
@@ -130,11 +130,18 @@ void attachInterruptTask(void *pvParameters) {
   // timerAlarmWrite(My_timer, 1000000, true);
   // timerAlarmEnable(My_timer); //Just Enable
   // vTaskDelete(NULL);
+  int last_time = 0;
   while(1){
-    int last_time = 0;
-    if(millis()-last_time >=50){
-      updatePID();
-      last_time = millis();
+    if(millis()-last_message_time >= message_time_interval){
+      moving = 0;
+      stopMotors();
+      digitalWrite(2, LOW);
+    }
+    else {
+      while(millis()-last_time >= 50){
+        updatePID();
+        last_time = millis();
+      }
     }
     delay(1);
   }

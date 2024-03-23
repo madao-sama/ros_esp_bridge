@@ -8,7 +8,7 @@ unsigned long long int last_message_time = 0;
 
 void attachInterruptTask(void *pvParameters);
 void IRAM_ATTR onTimer();
-void runCommand(char *cmd); 
+void runCommand(); 
 void resetCommand();
 
 #endif

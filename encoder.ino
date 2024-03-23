@@ -5,8 +5,8 @@
 */
 
 void shaft_moved_1(){
-  static int last_run = 0;
-  if (millis()-last_run>5){
+  // static int last_run = 0;
+  // if (millis()-last_run>5){
     if (digitalRead(encoder1_c2)==1){
       motor1PID.Encoder++;
       motor1PID.dir="CW";
@@ -14,13 +14,13 @@ void shaft_moved_1(){
     if (digitalRead(encoder1_c2)==0){
       motor1PID.Encoder--; 
       motor1PID.dir="CCW";}
-    last_run=millis();
-  }
+  //   last_run=millis();
+  // }
 }
 
 void shaft_moved_2(){
-  static int last_run = 0;
-  if (millis()-last_run>5){
+  // static int last_run = 0;
+  // if (millis()-last_run>5){
     if (digitalRead(encoder2_c2)==1){
       motor2PID.Encoder++;
       motor2PID.dir = "CW";
@@ -28,13 +28,13 @@ void shaft_moved_2(){
     if (digitalRead(encoder2_c2)==0){
       motor2PID.Encoder--; 
       motor2PID.dir="CCW";}
-    last_run=millis();
-  }
+    // last_run=millis();
+  // }
 }
 
 void shaft_moved_3(){
-  static int last_run = 0;
-  if (millis()-last_run>5){
+  // static int last_run = 0;
+  // if (millis()-last_run>5){
     if (digitalRead(encoder3_c2)==1){
       motor3PID.Encoder++;
       motor3PID.dir="CW";
@@ -42,14 +42,14 @@ void shaft_moved_3(){
     if (digitalRead(encoder3_c2)==0){
       motor3PID.Encoder--; 
       motor3PID.dir="CCW";}
-    last_run=millis();
-  }
+    // last_run=millis();
+  // }
 }
 
 void shaft_moved_4(){  
 
-  static int last_run = 0;
-  if (millis()-last_run>5){
+  // static int last_run = 0;
+  // if (millis()-last_run>5){
     if (digitalRead(encoder4_c2)==1){
       motor4PID.Encoder++;
       motor1PID.dir="CW";
@@ -57,8 +57,8 @@ void shaft_moved_4(){
     if (digitalRead(encoder4_c2)==0){
       motor4PID.Encoder--; 
       motor4PID.dir="CCW";}
-    last_run=millis();
-  }
+    // last_run=millis();
+  // }
 }
 
 void resetEncoders(){
