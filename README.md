@@ -5,15 +5,15 @@ Uses ESP32 as motor controller using PID.
 UDP version of https://github.com/hbrobotics/ros_arduino_bridge.
 Also added som specs as saving PID values on EEPROM. Changed PID algorithm's ticks per loop to RPM. 
 Repo is developing, not final version. Control it well before using. 
-
+---
 ### Hardware:
   I used ESP32 WROOM32 as MC. Alternatives can be used by pin configuration.\
   Motor driver L298N. Other options can be used by editing "motor.ino".\
   Motors are geared TT motor that can rotate up to 150 RPM.\
-  Encodedrs are simple hall encoder connected to motor directly.
-
+  Encoders are simple hall encoder connected to motor directly.\
   Schematic will be added asap.
-
+  
+---
 ### Communication:
 
   Communicate over UDP. Just change SSID and PASSWORD in "udp.h". Device will auto connect to UDP and able to communicate.\
