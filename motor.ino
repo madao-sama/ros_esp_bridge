@@ -35,12 +35,18 @@ void resetPID(){
 }
 
 void doPID(ts_motor_encoder_info * p) {
-  long Perror;
-  long output;
-  p->RealRPM = (60000000.0/(micros() - p->PrevMicros))*(p->Encoder - p->PrevEnc)/EncoderPerCount;
-  p->PrevMicros = micros();
-  p->PrevEnc = p->Encoder;
 
+  // Serial.print("pid: ");
+  // Serial.print("  core:  ");
+  // Serial.println( xPortGetCoreID());
+  double Perror;
+  long output;  
+  long current_micros =  micros();
+
+  p->RealRPM = (60000000.0/(current_micros - p->PrevMicros))*(p->Encoder - p->PrevEnc)/EncoderPerCount;
+  p->PrevMicros = current_micros;
+  p->PrevEnc = p->Encoder;
+  
   Perror = p->TargetRPM - p->RealRPM;
 
   output = (Kp * Perror - Kd * (p->RealRPM - p->PrevRPM) + p->ITerm) / Ko;
@@ -58,23 +64,19 @@ void doPID(ts_motor_encoder_info * p) {
 }
 
 void updatePID() {  
-  static unsigned long long int last_time = millis();
-  if(last_time >= time_interval){
-    stopMotors();
-    return;
-  }
   if (!moving){
     resetPID();
     stopMotors();
     return;
   }
-  
+  digitalWrite(2, HIGH);
+
   doPID(&motor1PID);
   doPID(&motor2PID);
   doPID(&motor3PID);
   doPID(&motor4PID);
   setMotorSpeed();
-  // digitalWrite(2, !digitalRead(2));
+  // print_motor_data();
 
 }
 
@@ -128,7 +130,6 @@ void setMotorSpeed() {
   if (motor4PID.output > 255){
     motor4PID.output = 255;
   }
-
   if      (reverse == 0) { analogWrite(motor4_in1, motor4PID.output); analogWrite(motor4_in2, 0); }
   else if (reverse == 1) { analogWrite(motor4_in2, motor4PID.output); analogWrite(motor4_in1, 0); }
 }
