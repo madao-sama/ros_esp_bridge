@@ -12,8 +12,12 @@ void runCommand() {
     // char *token;
     // int i = 1;
 
+  char *msg;
+  msg = (char*)malloc(64*sizeof( char));
   switch(*command) {
     case READ_ENCODERS:
+      sprintf(msg, "encoder:%d %d %d %d>", motor1PID.Encoder, motor2PID.Encoder, motor3PID.Encoder, motor4PID.Encoder);
+      udp.broadcastTo(msg, 8080);
       Serial.print(motor1PID.Encoder);
       Serial.print(" ");
       Serial.print(motor2PID.Encoder);
@@ -21,9 +25,12 @@ void runCommand() {
       Serial.print(motor3PID.Encoder);
       Serial.print(" ");
       Serial.println(motor4PID.Encoder);
+      free(msg);
       break;
 
     case GET_PID_VALUES:
+      sprintf(msg, "pid:%04f %04f %04f %04f>", Kp, Kd, Ki, Ko);
+      udp.broadcastTo(msg, 8080);
       Serial.print("Kp: ");
       Serial.print(Kp);
       Serial.print(" Kd: ");
@@ -37,6 +44,7 @@ void runCommand() {
     case RESET_ENCODERS:
       resetEncoders();
       resetPID();
+      udp.broadcastTo("resetencoder>", 8080);
       // Serial.println("OK");
       break;
 
