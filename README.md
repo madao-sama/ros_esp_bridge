@@ -36,15 +36,15 @@ Repo is developing, not final version. Control it well before using. <br />
         1.command: Chage PID parameters. This connds changes PID parameters and store them in EEPROM. So eventhough robot restarted, changed parameters can still be used.
                    Values are x100. So if you want to set parameter to 12.3, send 1230 as parameter.
                    Format is: "u:Kp Kd Ki Ko>", seems like: "u:1000 3400 2942 4999>"
-    !!! 1.response: Values are x100. So if you see parameter 1230, the parameter used is 12.3. 
+        1.response: Values are x100. So if you see parameter 1230, the parameter used is 12.3. 
                     Format is: "pid-Kp Kd Ki Ko>", seems like: "pid:1000 3400 2942 4999>"         
         2.command: Reset encoder values. This command resets encoders to 0.
                    Format is: "r>"
-    !!! 2.response: "resetencoder>"
+        2.response: "resetencoder>"
         3.command: Get PID Parameters. This shows current parameters.
                    Format is: "p>"
-    !!! 3.response: Values are x100. So if you want to set parameter to 12.3, send 1230 as parameter.
-                    "pid:1000 3400 2942 4999>" 
+        3.response: Format is below. All parameters are %04f float format.  
+                   "pid:0.1000 0.3400 0.2942 0.4999>" 
   
 
 ### Ota 
