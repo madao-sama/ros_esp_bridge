@@ -1,10 +1,12 @@
 # ESP32 ROS2 BRIDGE
 Bridge between ROS2 and ESP32 via UDP.
 
-Uses ESP32 as motor controller using PID.
-UDP version of https://github.com/hbrobotics/ros_arduino_bridge.
-Also added som specs as saving PID values on EEPROM. Changed PID algorithm's ticks per loop to RPM. 
-Repo is developing, not final version. Control it well before using. 
+### Starts
+Uses ESP32 as motor controller using PID.<br />
+UDP version of https://github.com/hbrobotics/ros_arduino_bridge.<br />
+Also added som specs as saving PID values on EEPROM. Changed PID algorithm's ticks per loop to RPM. <br />
+Repo is developing, not final version. Control it well before using. <br />
+
 ---
 ### Hardware:
   I used ESP32 WROOM32 as MC. Alternatives can be used by pin configuration.\
@@ -44,5 +46,11 @@ Repo is developing, not final version. Control it well before using.
     !!! 3.response: Values are x100. So if you want to set parameter to 12.3, send 1230 as parameter.
                     "pid:1000 3400 2942 4999>" 
   
+
+### Ota 
+OTA is available. You can upload binary files through device IP address.<br />
+To export binary in Arduino IDE, sketch/export compiled bianry. You can find bin file in build folder at the same folder with code.
+open browser then go "192.168.xxx.xxx" (esp ip). If it says "Hi! I am ESP32 inside ros_esp_bridge." you are in correct place.  <br />
+Go "192.168.xxx.xxx/update" then in firmware section, click select bin. After finished, you can go back. 
 !!! means this spec is not added yet. It is planned and will be added in next update.\
     You can check current parameters on Serial port. 3.command's response is shared on serial port now. Values are not x100 on serial port. UDP will be added in next update too.
